@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,38 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // 7-10 chaonin class 5
+    /*
+    // the rootView and UIViewController init process:
+    //在当前屏幕范围内作初始化
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    //初始化视图
+    //不要误写为：UIViewController *rootView = [UIViewController alloc];
+    ViewController *rootView = [ViewController alloc];
+    [rootView init];
+    
+    //初始化导航栏控制器
+    UINavigationController *navigation = [UINavigationController alloc];
+    [navigation initWithRootViewController:rootView];
+    
+    //把控制器挂在窗口中
+    self.window.rootViewController = navigation;
+    
+    [self.window makeKeyAndVisible];
+    */
+    // simplify process:
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    ViewController *rootView = [[ViewController alloc] init];
+    
+    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:rootView];
+    
+    self.window.rootViewController = navigation;
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
