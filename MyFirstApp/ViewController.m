@@ -18,15 +18,19 @@
     
     //+号开头类方法
     //-号开头实例方法
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    //自定义背景颜色
     UIColor *gray = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
     self.view.backgroundColor = gray;
     
+    //自定义导航栏背景颜色
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.2 green:0.72 blue:0.46 alpha:1];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
+    //自定义导航栏标题
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 44)];
     titleLabel.text = @"2016年7月10号";
     titleLabel.textColor = [UIColor whiteColor];
