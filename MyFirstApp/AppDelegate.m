@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "MomentListViewController.h"
 
 @interface AppDelegate ()
 
@@ -42,8 +42,9 @@
     // simplify process:
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    ViewController *rootView = [[ViewController alloc] init];
-    
+    //ViewController *rootView = [[ViewController alloc] init];
+    MomentListViewController *rootView = [[MomentListViewController alloc] init];
+
     UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:rootView];
     
     self.window.rootViewController = navigation;
