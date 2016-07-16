@@ -99,6 +99,8 @@
     self.yearAndMonthLabel.text = [dictionary objectForKey:@"yearAndMonth"];
     self.contentLabel.text = [dictionary objectForKey:@"content"];
     //chaonin
+    self.contentLabel.text = [dictionary objectForKey:@"day"];
+
 
 }
 
