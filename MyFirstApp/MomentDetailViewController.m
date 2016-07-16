@@ -10,6 +10,8 @@
 
 @interface MomentDetailViewController ()
 
+@property (nonatomic,strong) NSDictionary *dictionary;
+
 @end
 
 @implementation MomentDetailViewController
@@ -20,11 +22,15 @@
     //+号开头类方法
     //-号开头实例方法
     
-    [self setSingleLineTitle:@"2016年7月15日"];
+    NSString *yearAndMonth = [self.dictionary objectForKey:@"yearAndMonth"];
+    NSString *content = [self.dictionary objectForKey:@"content"];
+
+    
+    [self setSingleLineTitle:yearAndMonth];
     
     //正文文字
     UILabel *contentText = [[UILabel alloc] initWithFrame:CGRectMake(20, 84, [UIScreen mainScreen].bounds.size.width-20-20, 20)];
-    contentText.text = @"向狂想者致敬！";
+    contentText.text = content;
     contentText.textColor = [UIColor blackColor];
     contentText.font = [UIFont systemFontOfSize:15];
     contentText.textAlignment = NSTextAlignmentLeft;
@@ -34,6 +40,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (MomentDetailViewController *)initWithDictionary:(NSDictionary *)dictionary{
+    
+    self = [super init];
+    self.dictionary = dictionary;
+    
+    return self;
 }
 
 /*

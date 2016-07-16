@@ -10,4 +10,6 @@
 
 @interface MomentDetailViewController : BaseViewController
 
+-(MomentDetailViewController *)initWithDictionary:(NSDictionary *)dictionary;
+
 @end

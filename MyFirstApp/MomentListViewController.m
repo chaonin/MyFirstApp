@@ -98,8 +98,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    MomentDetailViewController *detail = [[MomentDetailViewController alloc] init];
+    
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"2016年7月", @"yearAndMonth",
+                                                                          @"向狂想者致敬",@"content", nil];
+    
+    MomentDetailViewController *detail = [[MomentDetailViewController alloc] initWithDictionary:dictionary];
     
     [self.navigationController pushViewController:detail animated:YES];
     
