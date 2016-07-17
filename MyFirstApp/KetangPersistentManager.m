@@ -14,7 +14,7 @@
 
     NSArray *docsDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *dirPath = docsDir[0];
-    NSString *dataFilePath = [[NSString alloc] initWithString:[dirPath stringByAppendingString:@"moment"]];
+    NSString *dataFilePath = [[NSString alloc] initWithString:[dirPath stringByAppendingPathComponent:@"moment"]];
     
     NSFileManager *manager = [NSFileManager defaultManager];
     
@@ -36,11 +36,25 @@
     }
 }
 
++(BOOL)saveDictionary:(NSDictionary *)dictionary{
+
+    //id array = [self getMoment];
+    id array = [KetangPersistentManager getMoment];
+    
+    if(array != nil){
+        NSMutableArray *moment = [NSMutableArray arrayWithArray:array];
+        //继续存储
+        [moment addObject:dictionary];
+        return [KetangPersistentManager saveMoment:moment];
+    }
+    return NO;
+}
+
 +(BOOL)saveMoment:(NSArray *) moment{
     
     NSArray *docsDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *dirPath = docsDir[0];
-    NSString *dataFilePath = [[NSString alloc] initWithString:[dirPath stringByAppendingString:@"moment"]];
+    NSString *dataFilePath = [[NSString alloc] initWithString:[dirPath stringByAppendingPathComponent:@"moment"]];
     
     NSFileManager *manager = [NSFileManager defaultManager];
     

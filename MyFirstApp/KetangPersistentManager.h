@@ -11,6 +11,6 @@
 @interface KetangPersistentManager : NSObject
 
 +(id)getMoment;
-+(BOOL)saveMoment:(NSArray *) moment;
++(BOOL)saveDictionary:(NSDictionary *)dictionary;
 
 @end

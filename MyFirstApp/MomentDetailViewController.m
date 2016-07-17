@@ -22,11 +22,13 @@
     //+号开头类方法
     //-号开头实例方法
     
+    /*
     NSString *yearAndMonth = [self.dictionary objectForKey:@"yearAndMonth"];
     NSString *content = [self.dictionary objectForKey:@"content"];
-
-    
-    [self setSingleLineTitle:yearAndMonth];
+    [self setSingleLineTitle:yearAndMonth];*/
+    NSString *yearAndMonthAndDay = [self.dictionary objectForKey:@"yearAndMonthAndDay"];
+    NSString *content = [self.dictionary objectForKey:@"content"];
+    [self setSingleLineTitle:yearAndMonthAndDay];
     
     //正文文字
     UILabel *contentText = [[UILabel alloc] initWithFrame:CGRectMake(20, 84, [UIScreen mainScreen].bounds.size.width-20-20, 20)];

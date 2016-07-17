@@ -41,6 +41,9 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.2 green:0.72 blue:0.46 alpha:1];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
+    //自动调整可滚动视图显示设置为NO（将变为上对齐）
+    self.automaticallyAdjustsScrollViewInsets = NO;
+  
         
 }
 
