@@ -37,7 +37,25 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
     
-    self.moment = [KetangPersistentManager getMoment];
+    //7/23: display the moment sorted
+    NSMutableArray *momentBeforeSorting = [KetangPersistentManager getMoment];
+    self.moment = [momentBeforeSorting sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *a, NSDictionary *b) {
+        NSNumber *aTimestamp = [a objectForKey:@"timestamp"];
+        NSNumber *bTitmestamp = [b objectForKey:@"timestamp"];
+        //如果a更新，a排在b之前
+        if(aTimestamp > bTitmestamp){
+            return (NSComparisonResult)NSOrderedAscending;
+        } else if(aTimestamp < bTitmestamp)
+        //如果b更新，b排在a之前
+        {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        //如果相同，顺序不变
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    
+    //self.moment = [KetangPersistentManager getMoment];
+    //self.moment = momentBeforeSorting;
     
     // 64 = 导航栏高度＋状态栏高度
     // CGRectMake(左上角x座标，左上角Y座标, 块大小宽度，块大小高度）
