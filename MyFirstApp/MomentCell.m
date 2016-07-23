@@ -101,6 +101,9 @@
     self.contentLabel.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.3];
     self.contentLabel.font = [UIFont systemFontOfSize:15];
     self.contentLabel.textAlignment = NSTextAlignmentCenter;
+    
+    self.contentLabel.numberOfLines = 0;//显示多行文本
+    
     [self.contentView addSubview:self.contentLabel];
 
     return self;

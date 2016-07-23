@@ -142,7 +142,7 @@
     
     NSInteger row = indexPath.row;
     NSDictionary *dictionary = self.moment[row];
-    NSString *content = [dictionary objectForKey:@"moment"];
+    NSString *content = [dictionary objectForKey:@"content"];
 
     CGFloat height = [MomentCell cellHeightFromText:content];
     
