@@ -20,6 +20,33 @@
 
 @implementation MomentCell
 
++(CGFloat)contentHeigh:(NSString *) text{
+    
+    CGSize size = CGSizeMake(240, 999999);
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],
+                                NSFontAttributeName, nil];
+    
+    CGRect rect = [text boundingRectWithSize:size
+                                     options:NSStringDrawingTruncatesLastVisibleLine|
+                   NSStringDrawingUsesLineFragmentOrigin|
+                   NSStringDrawingUsesFontLeading
+                                  attributes:attributes
+                                     context:nil];
+    CGFloat height = rect.size.height;
+    return height;
+}
+
++(CGFloat)cellHeightFromText:(NSString *) text{
+
+    CGFloat height = [MomentCell contentHeigh:text];
+    CGFloat plannedHeight = height + 70 + 70; //上下留白70像素
+    if(plannedHeight > 200) {
+        return plannedHeight;
+    }
+    return 200;
+}
+
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -69,7 +96,8 @@
     self.yearAndMonthLabel.textAlignment = NSTextAlignmentLeft;
     [self.contentView addSubview:self.yearAndMonthLabel];
     
-    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width-240)/2, 79, 240, 42)];
+    //self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width-240)/2, 79, 240, 42)];
+    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,0,0)];
     self.contentLabel.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.3];
     self.contentLabel.font = [UIFont systemFontOfSize:15];
     self.contentLabel.textAlignment = NSTextAlignmentCenter;
@@ -98,6 +126,11 @@
     self.dayOfWeekLabel.text = [dictionary objectForKey:@"dayOfWeek"];
     self.yearAndMonthLabel.text = [dictionary objectForKey:@"yearAndMonth"];
     self.contentLabel.text = [dictionary objectForKey:@"content"];
+    
+    CGFloat contentHeight = [MomentCell contentHeigh:self.contentLabel.text];
+    CGFloat cellHeight = [MomentCell cellHeightFromText:self.contentLabel.text];
+    CGRect rect = CGRectMake(([UIScreen mainScreen].bounds.size.width-240)/2, (cellHeight-contentHeight)/2, 240, contentHeight);
+    [self.contentLabel setFrame:rect];
 
 }
 

@@ -139,7 +139,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 200.0;
+    
+    NSInteger row = indexPath.row;
+    NSDictionary *dictionary = self.moment[row];
+    NSString *content = [dictionary objectForKey:@"moment"];
+
+    CGFloat height = [MomentCell cellHeightFromText:content];
+    
+    return height;
+    //return 200.0;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

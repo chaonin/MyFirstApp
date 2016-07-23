@@ -14,4 +14,6 @@
 
 -(void)setContentWithDictionary:(NSDictionary *)dictionary;
 
++(CGFloat)cellHeightFromText:(NSString *) text;
+
 @end
