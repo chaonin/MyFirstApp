@@ -147,8 +147,6 @@
     CGFloat height = [MomentCell cellHeightFromText:content];
     
     return height;
-    //return 200.0;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
