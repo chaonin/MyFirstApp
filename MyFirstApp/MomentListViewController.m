@@ -24,19 +24,6 @@
 
 -(void)loadMoment{
     
-    self.moment = [KetangPersistentManager getMoment];
-    
-    [self.tableView reloadData];
-
-
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
-    
     //7/23: display the moment sorted
     NSMutableArray *momentBeforeSorting = [KetangPersistentManager getMoment];
     self.moment = [momentBeforeSorting sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *a, NSDictionary *b) {
@@ -46,7 +33,7 @@
         if(aTimestamp > bTitmestamp){
             return (NSComparisonResult)NSOrderedAscending;
         } else if(aTimestamp < bTitmestamp)
-        //如果b更新，b排在a之前
+            //如果b更新，b排在a之前
         {
             return (NSComparisonResult)NSOrderedDescending;
         }
@@ -55,7 +42,21 @@
     }];
     
     //self.moment = [KetangPersistentManager getMoment];
+    
+    [self.tableView reloadData];
+
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
+    
+    //self.moment = [KetangPersistentManager getMoment];
     //self.moment = momentBeforeSorting;
+    //7/23: use recontructed sort-moment code
+    [self loadMoment];
     
     // 64 = 导航栏高度＋状态栏高度
     // CGRectMake(左上角x座标，左上角Y座标, 块大小宽度，块大小高度）
