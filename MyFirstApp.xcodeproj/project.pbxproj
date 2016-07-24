@@ -7,23 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		660F77401D3A339D00638CEC /* KetangPersistentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 660F773F1D3A339D00638CEC /* KetangPersistentManager.m */; };
+		660F77441D3A71C000638CEC /* PostMomentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 660F77431D3A71C000638CEC /* PostMomentViewController.m */; };
+		660F77471D3B6C4000638CEC /* KetangUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 660F77461D3B6C4000638CEC /* KetangUtility.m */; };
+		66D285B51D44BCA900E9F71C /* BlankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D285B41D44BCA900E9F71C /* BlankView.m */; };
+		66D285B91D44C2CE00E9F71C /* RetryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D285B81D44C2CE00E9F71C /* RetryView.m */; };
 		66E0E6961D3231D700044F9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E0E6951D3231D700044F9B /* main.m */; };
 		66E0E6991D3231D700044F9B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E0E6981D3231D700044F9B /* AppDelegate.m */; };
-		66E0E69C1D3231D700044F9B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E0E69B1D3231D700044F9B /* ViewController.m */; };
 		66E0E6A11D3231D700044F9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66E0E6A01D3231D700044F9B /* Assets.xcassets */; };
 		66E0E6A41D3231D700044F9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66E0E6A21D3231D700044F9B /* LaunchScreen.storyboard */; };
+		66E0E6AD1D34F8BD00044F9B /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E0E6AC1D34F8BD00044F9B /* BaseViewController.m */; };
+		66E0E6B01D37537F00044F9B /* MomentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E0E6AF1D37537F00044F9B /* MomentListViewController.m */; };
+		66E0E6B31D37CAB000044F9B /* MomentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E0E6B21D37CAB000044F9B /* MomentDetailViewController.m */; };
+		66E0E6B61D39232C00044F9B /* MomentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E0E6B51D39232C00044F9B /* MomentCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		660F773E1D3A339D00638CEC /* KetangPersistentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KetangPersistentManager.h; sourceTree = "<group>"; };
+		660F773F1D3A339D00638CEC /* KetangPersistentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KetangPersistentManager.m; sourceTree = "<group>"; };
+		660F77421D3A71C000638CEC /* PostMomentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostMomentViewController.h; sourceTree = "<group>"; };
+		660F77431D3A71C000638CEC /* PostMomentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostMomentViewController.m; sourceTree = "<group>"; };
+		660F77451D3B6C4000638CEC /* KetangUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KetangUtility.h; sourceTree = "<group>"; };
+		660F77461D3B6C4000638CEC /* KetangUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KetangUtility.m; sourceTree = "<group>"; };
+		66D285B31D44BCA900E9F71C /* BlankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlankView.h; sourceTree = "<group>"; };
+		66D285B41D44BCA900E9F71C /* BlankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlankView.m; sourceTree = "<group>"; };
+		66D285B71D44C2CE00E9F71C /* RetryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetryView.h; sourceTree = "<group>"; };
+		66D285B81D44C2CE00E9F71C /* RetryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetryView.m; sourceTree = "<group>"; };
 		66E0E6911D3231D700044F9B /* MyFirstApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirstApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66E0E6951D3231D700044F9B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		66E0E6971D3231D700044F9B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		66E0E6981D3231D700044F9B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		66E0E69A1D3231D700044F9B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		66E0E69B1D3231D700044F9B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		66E0E6A01D3231D700044F9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66E0E6A31D3231D700044F9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66E0E6A51D3231D700044F9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66E0E6AB1D34F8BD00044F9B /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		66E0E6AC1D34F8BD00044F9B /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		66E0E6AE1D37537F00044F9B /* MomentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentListViewController.h; sourceTree = "<group>"; };
+		66E0E6AF1D37537F00044F9B /* MomentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentListViewController.m; sourceTree = "<group>"; };
+		66E0E6B11D37CAB000044F9B /* MomentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentDetailViewController.h; sourceTree = "<group>"; };
+		66E0E6B21D37CAB000044F9B /* MomentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentDetailViewController.m; sourceTree = "<group>"; };
+		66E0E6B41D39232C00044F9B /* MomentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentCell.h; sourceTree = "<group>"; };
+		66E0E6B51D39232C00044F9B /* MomentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +61,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		660F77411D3A6F9F00638CEC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				660F773E1D3A339D00638CEC /* KetangPersistentManager.h */,
+				660F773F1D3A339D00638CEC /* KetangPersistentManager.m */,
+				660F77451D3B6C4000638CEC /* KetangUtility.h */,
+				660F77461D3B6C4000638CEC /* KetangUtility.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		66D285B61D44BCBF00E9F71C /* Custom View */ = {
+			isa = PBXGroup;
+			children = (
+				66D285B31D44BCA900E9F71C /* BlankView.h */,
+				66D285B41D44BCA900E9F71C /* BlankView.m */,
+				66E0E6B41D39232C00044F9B /* MomentCell.h */,
+				66E0E6B51D39232C00044F9B /* MomentCell.m */,
+				66D285B71D44C2CE00E9F71C /* RetryView.h */,
+				66D285B81D44C2CE00E9F71C /* RetryView.m */,
+			);
+			name = "Custom View";
+			sourceTree = "<group>";
+		};
 		66E0E6881D3231D700044F9B = {
 			isa = PBXGroup;
 			children = (
@@ -56,10 +104,18 @@
 		66E0E6931D3231D700044F9B /* MyFirstApp */ = {
 			isa = PBXGroup;
 			children = (
+				66D285B61D44BCBF00E9F71C /* Custom View */,
+				660F77411D3A6F9F00638CEC /* Common */,
 				66E0E6971D3231D700044F9B /* AppDelegate.h */,
 				66E0E6981D3231D700044F9B /* AppDelegate.m */,
-				66E0E69A1D3231D700044F9B /* ViewController.h */,
-				66E0E69B1D3231D700044F9B /* ViewController.m */,
+				66E0E6B11D37CAB000044F9B /* MomentDetailViewController.h */,
+				66E0E6B21D37CAB000044F9B /* MomentDetailViewController.m */,
+				66E0E6AB1D34F8BD00044F9B /* BaseViewController.h */,
+				66E0E6AC1D34F8BD00044F9B /* BaseViewController.m */,
+				66E0E6AE1D37537F00044F9B /* MomentListViewController.h */,
+				66E0E6AF1D37537F00044F9B /* MomentListViewController.m */,
+				660F77421D3A71C000638CEC /* PostMomentViewController.h */,
+				660F77431D3A71C000638CEC /* PostMomentViewController.m */,
 				66E0E6A01D3231D700044F9B /* Assets.xcassets */,
 				66E0E6A21D3231D700044F9B /* LaunchScreen.storyboard */,
 				66E0E6A51D3231D700044F9B /* Info.plist */,
@@ -145,9 +201,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66E0E69C1D3231D700044F9B /* ViewController.m in Sources */,
+				66D285B91D44C2CE00E9F71C /* RetryView.m in Sources */,
+				66E0E6AD1D34F8BD00044F9B /* BaseViewController.m in Sources */,
+				660F77471D3B6C4000638CEC /* KetangUtility.m in Sources */,
 				66E0E6991D3231D700044F9B /* AppDelegate.m in Sources */,
+				660F77441D3A71C000638CEC /* PostMomentViewController.m in Sources */,
+				66E0E6B31D37CAB000044F9B /* MomentDetailViewController.m in Sources */,
+				66D285B51D44BCA900E9F71C /* BlankView.m in Sources */,
 				66E0E6961D3231D700044F9B /* main.m in Sources */,
+				660F77401D3A339D00638CEC /* KetangPersistentManager.m in Sources */,
+				66E0E6B01D37537F00044F9B /* MomentListViewController.m in Sources */,
+				66E0E6B61D39232C00044F9B /* MomentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +352,7 @@
 				66E0E6AA1D3231D700044F9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

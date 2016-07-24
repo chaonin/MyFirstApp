@@ -12,15 +12,60 @@
 #import "PostMomentViewController.h"
 #import "KetangPersistentManager.h"
 #import "KetangUtility.h"
+#import "BlankView.h"
+#import "RetryView.h"
 
 @interface MomentListViewController ()
 
 @property(nonatomic, strong) NSArray *moment;
 @property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) UIView *blankView;
+@property(nonatomic, strong) UIView *retryView;
 
 @end
 
 @implementation MomentListViewController
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    if(self.tableView != nil){
+        //找到被选中的那一行
+        NSIndexPath *selectedRow = [self.tableView indexPathForSelectedRow];
+        if (selectedRow != nil) {
+            //取消这一行的选中状态
+            [self.tableView deselectRowAtIndexPath:selectedRow animated:YES];
+        }
+        
+    }
+}
+
+-(void)handleView{
+
+    //如果读取失败，展示retryView
+    if (self.moment == nil) {
+        [self.tableView removeFromSuperview];
+        [self.blankView removeFromSuperview];
+        [self.retryView removeFromSuperview];
+        [self.view addSubview:self.retryView];
+        return;
+    }
+    //如果读取成功，但条目数为0，展示blankView
+    if([self.moment count] == 0){
+        [self.tableView removeFromSuperview];
+        [self.blankView removeFromSuperview];
+        [self.retryView removeFromSuperview];
+        [self.view addSubview:self.blankView];
+        return;
+    }
+    //如果读取成功，但条目数不为0，则展示tableView
+    [self.tableView removeFromSuperview];
+    [self.blankView removeFromSuperview];
+    [self.retryView removeFromSuperview];
+    [self.view addSubview:self.tableView];
+
+    [self.tableView reloadData];
+
+}
 
 -(void)loadMoment{
     
@@ -42,29 +87,27 @@
     }];
     
     //self.moment = [KetangPersistentManager getMoment];
-    
-    [self.tableView reloadData];
-
+    [self handleView];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
-    
-    //self.moment = [KetangPersistentManager getMoment];
-    //self.moment = momentBeforeSorting;
-    //7/23: use recontructed sort-moment code
-    [self loadMoment];
-    
+    //1、表格的实例化和初始化
     // 64 = 导航栏高度＋状态栏高度
     // CGRectMake(左上角x座标，左上角Y座标, 块大小宽度，块大小高度）
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-64)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64,[KetangUtility screenWidth], [KetangUtility screenHeight]-64)];
     [self.view addSubview:self.tableView];
     //协议签署
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    //2、空台提示页实例化和初始化
+    self.blankView = [BlankView blankViewWithText:@"空空如也" buttonText:@"写一条" target:self action:@selector(post)];
+    
+    //3、重试提示页实例化和初始化
+    self.retryView = [RetryView retryViewWithText:@"额...出错了" buttonText:@"重试" target:self action:@selector(loadMoment)];
+
     
     //写笔记按钮: target点击调用后面action对应函数的类 action调用的函数
     UIBarButtonItem *post = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(post)];
@@ -72,6 +115,13 @@
    
     
     [self setSingleLineTitle:@"笔记"];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
+    //self.moment = [KetangPersistentManager getMoment];
+    //self.moment = momentBeforeSorting;
+    //7/23: use recontructed sort-moment code
+    [self loadMoment];
 
 }
 

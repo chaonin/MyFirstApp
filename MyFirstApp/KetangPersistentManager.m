@@ -19,6 +19,10 @@
     NSFileManager *manager = [NSFileManager defaultManager];
     
     @try {
+        //debug for retryView
+        //NSException *e = [NSException exceptionWithName:@"error" reason:nil userInfo:nil];
+        //@throw e;
+        
         BOOL fileExist = [manager fileExistsAtPath:dataFilePath];
         if (fileExist) {
             //返回读取到的结果
