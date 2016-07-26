@@ -7,12 +7,42 @@
 //
 
 #import "BaseViewController.h"
+#import "KetangUtility.h"
 
 @interface BaseViewController ()
+
+@property (nonatomic, strong)UIActivityIndicatorView *loading;
 
 @end
 
 @implementation BaseViewController
+
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+
+    //如果导航控制器上只有一个页面，就不需要手势识别
+    if (self.navigationController.viewControllers.count == 1) {
+        return NO;
+    }
+    //其他情况则需要
+    return YES;
+}
+
+-(void)showLoading{
+    
+    if (self.loading == nil) {
+        self.loading = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(([KetangUtility screenWidth]-20)/2, ([KetangUtility screenHeight]-20)/2, 20, 20)];
+        self.loading.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    }
+    [self.loading startAnimating];
+    [self.view addSubview:self.loading];
+    
+}
+-(void)hideLoading{
+
+    [self.loading stopAnimating];
+    [self.loading removeFromSuperview];
+    
+}
 
 -(void)setSingleLineTitle:(NSString *)title {
     

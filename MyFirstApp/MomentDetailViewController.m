@@ -7,6 +7,7 @@
 //
 
 #import "MomentDetailViewController.h"
+#import "KetangUtility.h"
 
 @interface MomentDetailViewController ()
 
@@ -30,13 +31,35 @@
     NSString *content = [self.dictionary objectForKey:@"content"];
     [self setSingleLineTitle:yearAndMonthAndDay];
     
+    
+    //获取正文文字高度
+    CGSize contentSize = CGSizeMake([KetangUtility screenWidth]-40, 999999999999);
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15], NSFontAttributeName, nil];
+    
+    CGRect contentRect = [content boundingRectWithSize:contentSize
+                                               options:NSStringDrawingTruncatesLastVisibleLine|
+                                                       NSStringDrawingUsesLineFragmentOrigin|
+                                                       NSStringDrawingUsesFontLeading
+                                            attributes:attributes
+                                               context:nil];
     //正文文字
-    UILabel *contentText = [[UILabel alloc] initWithFrame:CGRectMake(20, 84, [UIScreen mainScreen].bounds.size.width-20-20, 20)];
+    //UILabel *contentText = [[UILabel alloc] initWithFrame:CGRectMake(20, 84, [UIScreen mainScreen].bounds.size.width-20-20, 20)];
+    //使用实际高度
+    //UILabel *contentText = [[UILabel alloc] initWithFrame:CGRectMake(20, 84, [KetangUtility screenWidth]-20-20,contentRect.size.height)];
+    // label将会放进ScrollView，84是相对于屏幕的顶端坐标（40+24+20），放进ScroView后，相对于ScroView将变为20
+    UILabel *contentText = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, [KetangUtility screenWidth]-20-20,contentRect.size.height)];
+
+    contentText.numberOfLines = 0;//显示多行
     contentText.text = content;
     contentText.textColor = [UIColor blackColor];
     contentText.font = [UIFont systemFontOfSize:15];
     contentText.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:contentText];
+    //[self.view addSubview:contentText];//text放进scrollView，这里不再需要
+    
+    UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, [KetangUtility screenWidth], [KetangUtility screenHeight]-64)];
+    scroll.contentSize = CGSizeMake(contentRect.size.width, contentRect.size.height+20+20);//上下留白20，滑动有余地，不会那么局促
+    [scroll addSubview:contentText];
+    [self.view addSubview:scroll];
 }
 
 - (void)didReceiveMemoryWarning {

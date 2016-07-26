@@ -92,7 +92,7 @@
     
     self.yearAndMonthLabel = [[UILabel alloc] initWithFrame:CGRectMake(52, 38, 60, 15)];
     self.yearAndMonthLabel.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.3];
-    self.yearAndMonthLabel.font = [UIFont systemFontOfSize:12];
+    self.yearAndMonthLabel.font = [UIFont systemFontOfSize:11];
     self.yearAndMonthLabel.textAlignment = NSTextAlignmentLeft;
     [self.contentView addSubview:self.yearAndMonthLabel];
     

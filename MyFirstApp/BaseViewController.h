@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BaseViewController : UIViewController
+//7/26: 签署手势识别协议
+@interface BaseViewController : UIViewController<UIGestureRecognizerDelegate>
 
 //驼峰命名法: 第一个单词首字母小写，其他单词首字母大写
 -(void)setSingleLineTitle:(NSString *)title;
+-(void)showLoading;
+-(void)hideLoading;
 
 @end

@@ -21,6 +21,7 @@
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UIView *blankView;
 @property(nonatomic, strong) UIView *retryView;
+@property(nonatomic) BOOL tableShowed;
 
 @end
 
@@ -40,6 +41,8 @@
 }
 
 -(void)handleView{
+    
+    [self hideLoading];
 
     //如果读取失败，展示retryView
     if (self.moment == nil) {
@@ -47,6 +50,7 @@
         [self.blankView removeFromSuperview];
         [self.retryView removeFromSuperview];
         [self.view addSubview:self.retryView];
+        self.tableShowed = NO;
         return;
     }
     //如果读取成功，但条目数为0，展示blankView
@@ -55,19 +59,33 @@
         [self.blankView removeFromSuperview];
         [self.retryView removeFromSuperview];
         [self.view addSubview:self.blankView];
+        self.tableShowed = NO;
         return;
     }
+    
+    //动画处理新插入的笔记
+    if (self.tableShowed) {
+        [self.tableView beginUpdates];
+        NSIndexPath *theRow = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSArray *insertRows = [NSArray arrayWithObject:theRow];
+        [self.tableView insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
+        return;
+    }
+    
     //如果读取成功，但条目数不为0，则展示tableView
     [self.tableView removeFromSuperview];
     [self.blankView removeFromSuperview];
     [self.retryView removeFromSuperview];
     [self.view addSubview:self.tableView];
-
-    [self.tableView reloadData];
+    self.tableShowed = YES;
+    //[self.tableView reloadData];//前面的动画模块已经载入笔记
 
 }
 
 -(void)loadMoment{
+    
+    [self showLoading];
     
     //7/23: display the moment sorted
     NSMutableArray *momentBeforeSorting = [KetangPersistentManager getMoment];
@@ -87,11 +105,15 @@
     }];
     
     //self.moment = [KetangPersistentManager getMoment];
-    [self handleView];
+    [self performSelector:@selector(handleView) withObject:nil afterDelay:0.5];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableShowed = NO;
+    
     // Do any additional setup after loading the view.
     //1、表格的实例化和初始化
     // 64 = 导航栏高度＋状态栏高度
