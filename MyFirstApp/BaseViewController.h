@@ -16,4 +16,9 @@
 -(void)showLoading;
 -(void)hideLoading;
 
+-(void)showModaLoading;
+-(void)hideModaLoading;
+
+-(void)showAlertWithTitle:(NSString *)title message:(NSString *)message buttonText:(NSString *)buttonText;
+
 @end

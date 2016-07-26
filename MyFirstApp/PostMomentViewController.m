@@ -20,18 +20,37 @@
 
 -(void)saveMoment{
     
+    //如果没有写任何内容，不让存储，且不要给用户提示
+    if (self.inputView.text.length == 0) {
+        return;
+    }
+    
+    //如果用户输入的内容超过2000字，提示超过存储范围
+    if (self.inputView.text.length > 2000) {
+        [self showAlertWithTitle:@"文字内容超过2000，无法存储" message:nil buttonText:@"知道了"];
+        return;
+    }
+    
+    //展示阻塞加载
+    [self showModaLoading];
+    
     NSString *content = self.inputView.text;
     NSNumber *timestamp = [KetangUtility timestamp];
     
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:content, @"content", timestamp, @"timestamp", nil];
     BOOL saveSuccess = [KetangPersistentManager saveDictionary:dictionary];
+    //移除阻塞加载
+    [self hideModaLoading];
+    
     if (saveSuccess){
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         NSNotification *notification = [NSNotification notificationWithName:@"newMomentSave" object:nil];
         //通知去刷新
         [center postNotification:notification];
         [self dismissViewControllerAnimated:YES completion:nil];
+        return;
     }
+    [self showAlertWithTitle:@"存储失败" message:nil buttonText:@"好"];
 }
 
 -(void)cancel{

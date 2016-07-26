@@ -11,11 +11,60 @@
 
 @interface BaseViewController ()
 
-@property (nonatomic, strong)UIActivityIndicatorView *loading;
+@property (nonatomic, strong)UIActivityIndicatorView *loading;//非阻塞加载
+
+@property (nonatomic, strong)UIView *modal;//阻塞加载
 
 @end
 
 @implementation BaseViewController
+
+-(void)showAlertWithTitle:(NSString *)title message:(NSString *)message buttonText:(NSString *)buttonText{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action = [UIAlertAction actionWithTitle:buttonText
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:nil];
+    [alert addAction:action];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+
+-(void)showModaLoading{
+    
+    if (self.modal == nil) {
+        //黑色遮罩
+        self.modal = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [KetangUtility screenWidth], [KetangUtility screenHeight])];
+        self.modal.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+
+    }
+    
+    //更黑的圆角矩形
+    UIView *black = [[UIView alloc] initWithFrame:CGRectMake(([KetangUtility screenWidth]-80)/2, ([KetangUtility screenHeight]-80)/2, 80, 80)];
+    black.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+    black.layer.cornerRadius = 12;
+    black.layer.masksToBounds = YES;
+    [self.modal addSubview:black];
+
+    //白色加载动画
+    UIActivityIndicatorView *modalLoading = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(([KetangUtility screenWidth]-80)/2, ([KetangUtility screenHeight]-80)/2, 80, 80)];
+    modalLoading.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    [self.modal addSubview:modalLoading];
+    [modalLoading startAnimating];
+    
+    //把阻塞加载呈现给用户
+    UIWindow *window = [UIApplication sharedApplication].windows[0];
+    [window addSubview:self.modal];
+
+}
+-(void)hideModaLoading{
+
+    [self.modal removeFromSuperview];
+}
+
 
 -(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
 

@@ -56,6 +56,7 @@
 
 +(BOOL)saveMoment:(NSArray *) moment{
     
+ 
     NSArray *docsDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *dirPath = docsDir[0];
     NSString *dataFilePath = [[NSString alloc] initWithString:[dirPath stringByAppendingPathComponent:@"moment"]];
@@ -63,6 +64,10 @@
     NSFileManager *manager = [NSFileManager defaultManager];
     
     @try {
+        //debug for Alert
+        //NSException *e = [NSException exceptionWithName:@"error" reason:nil userInfo:nil];
+        //@throw e;
+
         BOOL saveSuccess = [NSKeyedArchiver archiveRootObject:moment toFile:dataFilePath];
         return saveSuccess;
     } @catch (NSException *exception) {
