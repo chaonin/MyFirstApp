@@ -8,6 +8,7 @@
 
 #import "RetryView.h"
 #import "KetangUtility.h"
+#import "UIButton+Ketang.h"
 
 @implementation RetryView
 
@@ -30,6 +31,13 @@
     retryLabel.font = [UIFont systemFontOfSize:17];
     [retryView addSubview:retryLabel];
     
+    UIButton *retryButton = [UIButton contentButtonWithTitle:buttonText target:target action:action];
+
+    
+    CGFloat retryButtonX = ([KetangUtility screenWidth] - retryButton.frame.size.width)/2;
+    CGFloat retryButtonY = (retryView.frame.size.height-retryButton.frame.size.height)/2  + 20;
+    [retryButton setFrame:CGRectMake(retryButtonX, retryButtonY, retryButton.frame.size.width, retryButton.frame.size.height)];
+    /*
     UIButton *retryButton = [UIButton buttonWithType:UIButtonTypeCustom];
     NSString *retryText = buttonText;
     [retryButton setTitle:retryText forState:UIControlStateNormal];
@@ -54,7 +62,8 @@
     [retryButton setFrame:CGRectMake(([KetangUtility screenWidth]-plannedRetryButtonWidth)/2, (retryView.frame.size.height-29)/2+20, plannedRetryButtonWidth, 29)];//按钮高度29
     [retryButton addTarget:target
                     action:action
-          forControlEvents:UIControlEventTouchUpInside];
+          forControlEvents:UIControlEventTouchUpInside];*/
+    
     [retryView addSubview:retryButton];
     
     return retryView;
