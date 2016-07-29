@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "KetangUtility.h"
+#import "UIButton+Ketang.h"
 
 @interface BaseViewController ()
 
@@ -18,6 +19,72 @@
 @end
 
 @implementation BaseViewController
+
+-(void)navigationBack{
+ 
+    if (self.navigationController != nil) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+-(void)setBackButton{
+    
+    UIButton *button = [UIButton navigationBackButtonWithTitle:@"返回" target:self action:@selector(navigationBack)];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    UIBarButtonItem *offset = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                            target:nil
+                                                                            action:nil];
+    CGFloat buttonOffset;
+    if ([KetangUtility screenWidth] >= 414) {
+        //iphone 6+, iphone6S+
+        buttonOffset = -12;
+    } else {
+        //其他设备
+        buttonOffset = -8;
+    }
+    offset.width = buttonOffset;
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:offset, barButton, nil];
+
+}
+
+-(void)setLeftNavigationButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action{
+    
+    UIButton *button = [UIButton navigationButtonWithTitle:title target:target action:action];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    UIBarButtonItem *offset = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                            target:nil
+                                                                            action:nil];
+    CGFloat buttonOffset;
+    if ([KetangUtility screenWidth] >= 414) {
+        //iphone 6+, iphone6S+
+        buttonOffset = -12;
+    } else {
+        //其他设备
+        buttonOffset = -8;
+    }
+    offset.width = buttonOffset;
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:offset, barButton, nil];
+    
+}
+-(void)setRightNavigationButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action{
+    
+    UIButton *button = [UIButton navigationButtonWithTitle:title target:target action:action];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    UIBarButtonItem *offset = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                                            target:nil
+                                                                            action:nil];
+    CGFloat buttonOffset;
+    if ([KetangUtility screenWidth] >= 414) {
+        //iphone 6+, iphone6S+
+        buttonOffset = -12;
+    } else {
+        //其他设备
+        buttonOffset = -8;
+    }
+    offset.width = buttonOffset;
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:offset, barButton, nil];
+}
+
 
 -(void)showAlertWithTitle:(NSString *)title message:(NSString *)message buttonText:(NSString *)buttonText{
     
@@ -119,6 +186,9 @@
     //自定义导航栏背景颜色
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.2 green:0.72 blue:0.46 alpha:1];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    [self.navigationItem setHidesBackButton:YES];
     
     //自动调整可滚动视图显示设置为NO（将变为上对齐）
     self.automaticallyAdjustsScrollViewInsets = NO;

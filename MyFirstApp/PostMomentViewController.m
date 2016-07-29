@@ -68,17 +68,12 @@
     [self setSingleLineTitle:@"写笔记"];
     
     //笔记保存和取消按钮
-    UIBarButtonItem *finish = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:
-                               UIBarButtonSystemItemDone target:self action:@selector(saveMoment)];
-    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:
-                               UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-    
-    self.navigationItem.rightBarButtonItem = finish;
-    self.navigationItem.leftBarButtonItem = cancel;
+    [self setRightNavigationButtonWithTitle:@"保存" target:self action:@selector(saveMoment)];
+    [self setLeftNavigationButtonWithTitle:@"取消" target:self action:@selector(cancel)];
     
     //初始化笔记编辑框
     self.inputView = [[UITextView alloc] initWithFrame:CGRectMake(0, 84, [UIScreen mainScreen].bounds.size.width, 300)];
-    self.inputView.editable = YES;
+    //self.inputView.editable = YES;
     [self.view addSubview:self.inputView];
     [self.inputView becomeFirstResponder];
     

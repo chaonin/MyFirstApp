@@ -12,4 +12,9 @@
 
 +(UIButton *)contentButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action;
 
++(UIButton *)navigationButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action;
+
++(UIButton *)navigationBackButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action;
+
+
 @end

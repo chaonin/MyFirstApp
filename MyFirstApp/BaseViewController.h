@@ -21,4 +21,9 @@
 
 -(void)showAlertWithTitle:(NSString *)title message:(NSString *)message buttonText:(NSString *)buttonText;
 
+-(void)setBackButton;
+-(void)setLeftNavigationButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action;
+-(void)setRightNavigationButtonWithTitle:(NSString *)title target:(id)target action:(SEL)action;
+
+
 @end

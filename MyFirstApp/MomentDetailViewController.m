@@ -19,6 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setBackButton];
+    
     // Do any additional setup after loading the view.
     //+号开头类方法
     //-号开头实例方法

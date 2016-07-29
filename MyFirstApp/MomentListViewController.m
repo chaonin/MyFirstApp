@@ -14,6 +14,7 @@
 #import "KetangUtility.h"
 #import "BlankView.h"
 #import "RetryView.h"
+#import "UIImage+Ketang.h"
 
 @interface MomentListViewController ()
 
@@ -22,10 +23,53 @@
 @property(nonatomic, strong) UIView *blankView;
 @property(nonatomic, strong) UIView *retryView;
 @property(nonatomic) BOOL tableShowed;
+@property(nonatomic, strong) UIImageView *cover;
 
 @end
 
 @implementation MomentListViewController
+
+-(void)showCover{
+    //设定好封面图片
+    self.cover = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, [KetangUtility screenWidth], [KetangUtility screenHeight])];
+    self.cover.image = [UIImage imageNamed:@"cover"];
+    self.cover.userInteractionEnabled = YES;
+    self.cover.contentMode = UIViewContentModeScaleAspectFill;
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:self.cover];
+    
+    //设定好好封面图片上按钮
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(([KetangUtility screenWidth]-200)/2, [KetangUtility screenHeight]-84, 200, 44)];
+    [button setTitle:@"进入"
+            forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor]
+                 forState:UIControlStateNormal];
+    
+    button.layer.borderWidth = 1;
+    button.layer.borderColor = [UIColor whiteColor].CGColor;
+    button.layer.cornerRadius = 6;
+    button.layer.masksToBounds = YES;
+    
+    [button setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithWhite:1 alpha:0.3] andSize:button.frame.size]
+                      forState:UIControlStateHighlighted];
+    [self.cover addSubview:button];
+    
+    [button addTarget:self
+               action:@selector(hideCover)
+     forControlEvents:UIControlEventTouchUpInside];
+    
+    
+}
+
+-(void)hideCover{
+    
+    //隐藏封面
+    [self.cover removeFromSuperview];
+    
+    //载入笔记
+    [self loadMoment];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated{
     
@@ -109,8 +153,26 @@
     
 }
 
+
+-(void)post{
+    
+    PostMomentViewController *post = [[PostMomentViewController alloc] init];
+    
+    //把post挂到 导航栏 下
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:post];
+    
+    
+    //导航栏挂到主导航栏
+    //底部升起 presentViewController
+    //右侧滑入 pushViewController
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //[self showCover];
     
     self.tableShowed = NO;
     
@@ -124,7 +186,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    //2、空台提示页实例化和初始化
+    //2、空白提示页实例化和初始化
     self.blankView = [BlankView blankViewWithText:@"空空如也" buttonText:@"写一条" target:self action:@selector(post)];
     
     //3、重试提示页实例化和初始化
@@ -132,14 +194,17 @@
 
     
     //写笔记按钮: target点击调用后面action对应函数的类 action调用的函数
-    UIBarButtonItem *post = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(post)];
-    self.navigationItem.rightBarButtonItem = post;
-   
+    //UIBarButtonItem *post = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(post)];
+    //self.navigationItem.rightBarButtonItem = post;
+    [self setRightNavigationButtonWithTitle:@"写笔记" target:self action:@selector(post)];
     
     [self setSingleLineTitle:@"笔记"];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
+    
+    //[self showCover];
+
     //self.moment = [KetangPersistentManager getMoment];
     //self.moment = momentBeforeSorting;
     //7/23: use recontructed sort-moment code
@@ -270,20 +335,6 @@
     
 }
 
--(void)post{
-    
-    PostMomentViewController *post = [[PostMomentViewController alloc] init];
-    
-    //把post挂到 导航栏 下
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:post];
-    
-    
-    //导航栏挂到主导航栏
-    //底部升起 presentViewController
-    //右侧滑入 pushViewController
-    [self.navigationController presentViewController:nav animated:YES completion:nil];
-    
-}
 /*
 #pragma mark - Navigation
 
