@@ -155,7 +155,7 @@
     }];
 
     //self.moment = [KetangPersistentManager getMoment];
-    [self performSelector:@selector(handleView) withObject:nil afterDelay:0.2];
+    [self performSelector:@selector(handleView) withObject:nil afterDelay:0.3];
     
 }
 
@@ -225,11 +225,6 @@
     
         
     MomentCell *cell = [MomentCell prepareCellForTableView:tableView];
-    
-    /*NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"15", @"day",
-                                @"星期五",@"dayOfWeek",
-                                @"2016年7月", @"yearAndMonth",
-                                @"向狂想者致敬",@"content", nil];*/
     
     NSInteger row = indexPath.row;
     
