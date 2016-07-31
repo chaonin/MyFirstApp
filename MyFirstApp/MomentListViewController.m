@@ -115,6 +115,7 @@
         [self.tableView insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationTop];
         [self.tableView endUpdates];
         return;
+
     }
     
     //如果读取成功，但条目数不为0，则展示tableView
@@ -154,7 +155,7 @@
     }];
 
     //self.moment = [KetangPersistentManager getMoment];
-    [self performSelector:@selector(handleView) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(handleView) withObject:nil afterDelay:0.2];
     
 }
 
