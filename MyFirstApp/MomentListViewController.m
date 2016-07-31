@@ -198,18 +198,13 @@
     //3、重试提示页实例化和初始化
     self.retryView = [RetryView retryViewWithText:@"额...出错了" buttonText:@"重试" target:self action:@selector(loadMoment)];
 
-    //self.navigationItem.rightBarButtonItem = post;
     [self setRightNavigationButtonWithTitle:@"写笔记" target:self action:@selector(post)];
     
     [self setSingleLineTitle:@"笔记"];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
-    //self.moment = [KetangPersistentManager getMoment];
-    //self.moment = momentBeforeSorting;
-    //7/23: use recontructed sort-moment code
-    //[self loadMoment];
-
+ 
 }
 
 - (void)didReceiveMemoryWarning {
