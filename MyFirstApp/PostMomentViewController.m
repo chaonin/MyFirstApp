@@ -77,7 +77,6 @@
     [self.view addSubview:self.inputView];
     [self.inputView becomeFirstResponder];
     
-    
 }
 
 - (void)didReceiveMemoryWarning {

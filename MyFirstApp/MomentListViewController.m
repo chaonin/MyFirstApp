@@ -123,7 +123,7 @@
     [self.retryView removeFromSuperview];
     [self.view addSubview:self.tableView];
     self.tableShowed = YES;
-    //[self.tableView reloadData];//前面的动画模块已经载入笔记
+    [self.tableView reloadData];//前面的动画模块已经载入笔记
 
 }
 
@@ -133,21 +133,26 @@
     
     //7/23: display the moment sorted
     NSMutableArray *momentBeforeSorting = [KetangPersistentManager getMoment];
-    self.moment = [momentBeforeSorting sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *a, NSDictionary *b) {
+    self.moment = [momentBeforeSorting sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *a,NSDictionary*b) {
+        
         NSNumber *aTimestamp = [a objectForKey:@"timestamp"];
-        NSNumber *bTitmestamp = [b objectForKey:@"timestamp"];
-        //如果a更新，a排在b之前
-        if(aTimestamp > bTitmestamp){
+        NSNumber *bTimestamp = [b objectForKey:@"timestamp"];
+        
+        //如果A更新，A排在B之前
+        if (aTimestamp > bTimestamp) {
             return (NSComparisonResult)NSOrderedAscending;
-        } else if(aTimestamp < bTitmestamp)
-            //如果b更新，b排在a之前
-        {
+        }
+        
+        //如果B更新，B排在A之前
+        
+        if (bTimestamp > aTimestamp) {
             return (NSComparisonResult)NSOrderedDescending;
         }
-        //如果相同，顺序不变
+        
+        //如果一样，则顺序不改变
         return (NSComparisonResult)NSOrderedSame;
     }];
-    
+
     //self.moment = [KetangPersistentManager getMoment];
     [self performSelector:@selector(handleView) withObject:nil afterDelay:0.5];
     
@@ -172,7 +177,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[self showCover];
+    [self showCover];
     
     self.tableShowed = NO;
     
@@ -202,13 +207,14 @@
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
-    
+    //[self showAlertWithTitle:@"here2" message:nil buttonText:@"知道了"];
+
     //[self showCover];
 
     //self.moment = [KetangPersistentManager getMoment];
     //self.moment = momentBeforeSorting;
     //7/23: use recontructed sort-moment code
-    [self loadMoment];
+    //[self loadMoment];
 
 }
 
@@ -228,43 +234,7 @@
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    /*
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"moment"];
-    
-    if (cell == nil){
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"moment"];
-        UILabel *dayLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 16, 47, 46)];
-        dayLabel.text = @"15";
-        dayLabel.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.3];
-        dayLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:40];
-        dayLabel.textAlignment = NSTextAlignmentRight;
-        [cell.contentView addSubview:dayLabel];
-        
-        UILabel *dayOfWeekLabel = [[UILabel alloc] initWithFrame:CGRectMake(52, 23, 36, 15)];
-        dayOfWeekLabel.text = @"星期五";
-        dayOfWeekLabel.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.3];
-        dayOfWeekLabel.font = [UIFont systemFontOfSize:12];
-        dayOfWeekLabel.textAlignment = NSTextAlignmentLeft;
-        [cell.contentView addSubview:dayOfWeekLabel];
-        
-        UILabel *yearAndMonthLabel = [[UILabel alloc] initWithFrame:CGRectMake(52, 38, 60, 15)];
-        yearAndMonthLabel.text = @"2016年7月";
-        yearAndMonthLabel.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.3];
-        yearAndMonthLabel.font = [UIFont systemFontOfSize:12];
-        yearAndMonthLabel.textAlignment = NSTextAlignmentLeft;
-        [cell.contentView addSubview:yearAndMonthLabel];
-        
-        UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width-240)/2, 79, 240, 42)];
-        contentLabel.text = @"向狂想者致敬";
-        contentLabel.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.3];
-        contentLabel.font = [UIFont systemFontOfSize:15];
-        contentLabel.textAlignment = NSTextAlignmentCenter;
-        [cell.contentView addSubview:contentLabel];
-        
-        
-    }*/
-    
     MomentCell *cell = [MomentCell prepareCellForTableView:tableView];
     
     /*NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"15", @"day",
