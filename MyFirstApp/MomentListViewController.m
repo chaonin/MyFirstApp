@@ -123,7 +123,7 @@
     [self.retryView removeFromSuperview];
     [self.view addSubview:self.tableView];
     self.tableShowed = YES;
-    //[self.tableView reloadData];//前面的动画模块已经载入笔记
+    [self.tableView reloadData];//前面的动画模块已经载入笔记
 
 }
 
