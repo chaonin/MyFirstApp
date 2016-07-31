@@ -123,7 +123,7 @@
     [self.retryView removeFromSuperview];
     [self.view addSubview:self.tableView];
     self.tableShowed = YES;
-    [self.tableView reloadData];//前面的动画模块已经载入笔记
+    //[self.tableView reloadData];//前面的动画模块已经载入笔记
 
 }
 
@@ -197,9 +197,6 @@
     //3、重试提示页实例化和初始化
     self.retryView = [RetryView retryViewWithText:@"额...出错了" buttonText:@"重试" target:self action:@selector(loadMoment)];
 
-    
-    //写笔记按钮: target点击调用后面action对应函数的类 action调用的函数
-    //UIBarButtonItem *post = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(post)];
     //self.navigationItem.rightBarButtonItem = post;
     [self setRightNavigationButtonWithTitle:@"写笔记" target:self action:@selector(post)];
     
@@ -207,10 +204,6 @@
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
-    //[self showAlertWithTitle:@"here2" message:nil buttonText:@"知道了"];
-
-    //[self showCover];
-
     //self.moment = [KetangPersistentManager getMoment];
     //self.moment = momentBeforeSorting;
     //7/23: use recontructed sort-moment code
