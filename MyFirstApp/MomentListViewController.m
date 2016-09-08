@@ -82,6 +82,19 @@
         }
         
     }
+    
+    [self.navigationController setToolbarHidden:NO animated:YES];
+    
+    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:nil action:nil];
+    UIBarButtonItem *item3 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:nil action:nil];
+    UIBarButtonItem *item4 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:nil action:nil];
+    UIBarButtonItem *item5 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:nil];
+    
+    
+    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    //[self.navigationController.toolbar setItems:[NSArray arrayWithObjects:item1,flexible,item2,flexible,item3,flexible,item4,flexible,item5,flexible,nil] animated:YES];
+    [self setToolbarItems:[NSArray arrayWithObjects:item1,flexible,item3,flexible,item4,flexible,item5,flexible,nil] animated:YES];
+    
 }
 
 -(void)handleView{
@@ -275,12 +288,6 @@
     
     [dateDictionary addEntriesFromDictionary:dictionary];
     
-    
-    /*
-    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"2016年7月", @"yearAndMonth",
-                                                                          @"向狂想者致敬",@"content", nil];
-    
-    MomentDetailViewController *detail = [[MomentDetailViewController alloc] initWithDictionary:dictionary];*/
     
     MomentDetailViewController *detail = [[MomentDetailViewController alloc] initWithDictionary:dateDictionary];
 

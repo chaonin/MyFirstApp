@@ -188,6 +188,13 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    /*
+    [self.navigationController setToolbarHidden:NO];
+    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"测试" style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    [self.navigationController.toolbar setItems:[NSArray arrayWithObjects:item1,flexible,nil]];
+     */
+    
     [self.navigationItem setHidesBackButton:YES];
     
     //自动调整可滚动视图显示设置为NO（将变为上对齐）

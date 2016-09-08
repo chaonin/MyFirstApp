@@ -8,14 +8,39 @@
 
 #import "MomentDetailViewController.h"
 #import "KetangUtility.h"
+#import "KetangPersistentManager.h"
 
 @interface MomentDetailViewController ()
 
 @property (nonatomic,strong) NSDictionary *dictionary;
+@property (nonatomic,strong) NSArray *moment;
 
 @end
 
 @implementation MomentDetailViewController
+
+-(void)handler1{
+    [self showAlertWithTitle:@"Haha" message:nil buttonText:@"ok"];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    
+    [self.navigationController setToolbarHidden:NO animated:YES];
+    
+    //UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(handler1)];
+    
+    
+    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    //[self.navigationController.toolbar setItems:[NSArray arrayWithObjects:item1,flexible,item2,flexible,item3,flexible,item4,flexible,item5,flexible,nil] animated:YES];
+    [self setToolbarItems:[NSArray arrayWithObjects:item1,flexible,nil] animated:YES];
+    
+    self.navigationController.toolbar.barTintColor = [UIColor colorWithRed:0.2 green:0.72 blue:0.46 alpha:1];
+    self.navigationController.toolbar.barStyle = UIBarStyleBlack;
+    self.navigationController.toolbar.tintColor = [UIColor whiteColor];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,6 +88,7 @@
     scroll.contentSize = CGSizeMake(contentRect.size.width, contentRect.size.height+20+20);//上下留白20，滑动有余地，不会那么局促
     [scroll addSubview:contentText];
     [self.view addSubview:scroll];
+    
 }
 
 - (void)didReceiveMemoryWarning {

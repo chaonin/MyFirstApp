@@ -61,7 +61,7 @@
     NSString *dirPath = docsDir[0];
     NSString *dataFilePath = [[NSString alloc] initWithString:[dirPath stringByAppendingPathComponent:@"moment"]];
     
-    NSFileManager *manager = [NSFileManager defaultManager];
+    //NSFileManager *manager = [NSFileManager defaultManager];
     
     @try {
         //debug for Alert
