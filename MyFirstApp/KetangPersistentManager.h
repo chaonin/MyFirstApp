@@ -12,5 +12,7 @@
 
 +(id)getMoment;
 +(BOOL)saveDictionary:(NSDictionary *)dictionary;
++(BOOL)saveMoment:(NSArray *) moment;
+
 
 @end

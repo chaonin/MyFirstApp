@@ -22,7 +22,7 @@
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UIView *blankView;
 @property(nonatomic, strong) UIView *retryView;
-@property(nonatomic) BOOL tableShowed;
+@property(nonatomic) BOOL tableShowed,getRomoveNotification;
 @property(nonatomic, strong) UIImageView *cover;
 
 @end
@@ -70,6 +70,11 @@
     [self loadMoment];
 }
 
+-(void) handleRemove{
+    
+    self.getRomoveNotification = YES;
+    [self loadMoment];
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     
@@ -83,18 +88,8 @@
         
     }
     
-    [self.navigationController setToolbarHidden:NO animated:YES];
-    
-    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:nil action:nil];
-    UIBarButtonItem *item3 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:nil action:nil];
-    UIBarButtonItem *item4 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:nil action:nil];
-    UIBarButtonItem *item5 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:nil];
-    
-    
-    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    //[self.navigationController.toolbar setItems:[NSArray arrayWithObjects:item1,flexible,item2,flexible,item3,flexible,item4,flexible,item5,flexible,nil] animated:YES];
-    [self setToolbarItems:[NSArray arrayWithObjects:item1,flexible,item3,flexible,item4,flexible,item5,flexible,nil] animated:YES];
-    
+    [self.navigationController setToolbarHidden:YES];
+
 }
 
 -(void)handleView{
@@ -121,12 +116,16 @@
     }
     
     //动画处理新插入的笔记
-    if (self.tableShowed) {
+    if (self.tableShowed && !self.getRomoveNotification) {
+        //[self showAlertWithTitle:@"Insert new one" message:nil buttonText:@"ok"];
+        //[NSThread sleepForTimeInterval:3];
+
         [self.tableView beginUpdates];
         NSIndexPath *theRow = [NSIndexPath indexPathForRow:0 inSection:0];
         NSArray *insertRows = [NSArray arrayWithObject:theRow];
         [self.tableView insertRowsAtIndexPaths:insertRows withRowAnimation:UITableViewRowAnimationTop];
         [self.tableView endUpdates];
+
         return;
 
     }
@@ -168,6 +167,8 @@
     }];
 
     //self.moment = [KetangPersistentManager getMoment];
+    //[self showAlertWithTitle:@"beforeCrashed" message:nil buttonText:@"ok"];
+
     [self performSelector:@selector(handleView) withObject:nil afterDelay:0.3];
     
 }
@@ -192,8 +193,9 @@
     [super viewDidLoad];
     
     [self showCover];
-    
     self.tableShowed = NO;
+    self.getRomoveNotification = NO;
+    
     
     // Do any additional setup after loading the view.
     //1、表格的实例化和初始化
@@ -217,6 +219,7 @@
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
+    [center addObserver:self selector:@selector(handleRemove) name:@"deleteReload" object:nil];
  
 }
 

@@ -13,29 +13,51 @@
 @interface MomentDetailViewController ()
 
 @property (nonatomic,strong) NSDictionary *dictionary;
-@property (nonatomic,strong) NSArray *moment;
 
 @end
 
 @implementation MomentDetailViewController
 
--(void)handler1{
-    [self showAlertWithTitle:@"Haha" message:nil buttonText:@"ok"];
+-(void)removeMoment{
+    NSInteger count, i;
+    
+    id array = [KetangPersistentManager getMoment];
+    NSMutableArray *mmoment = [NSMutableArray arrayWithArray:array];
+    count = mmoment.count;
+    //NSString *tmp = [NSString stringWithFormat:@"%ld", count];
+    //[self showAlertWithTitle:@"haha" message:nil buttonText:tmp];
+    //return ;
+    for (i = 0; i < count; i = i+1){
+        if ([[mmoment[i] objectForKey:@"timestamp"]  isEqual:[self.dictionary objectForKey:@"timestamp"]] ) {
+            [mmoment removeObjectAtIndex:i];
+            [KetangPersistentManager saveMoment:mmoment];
+            
+            NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+            NSNotification *notification = [NSNotification notificationWithName:@"deleteReload" object:nil];
+            //通知去刷新
+            [center postNotification:notification];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+
+            //[self viewWillDisappear:YES];
+            return;
+        }
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     
-    
+    //显示工具栏
     [self.navigationController setToolbarHidden:NO animated:YES];
     
     //UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:nil];
-    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(handler1)];
-    
-    
+    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(removeMoment)];
     UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    //[self.navigationController.toolbar setItems:[NSArray arrayWithObjects:item1,flexible,item2,flexible,item3,flexible,item4,flexible,item5,flexible,nil] animated:YES];
+    
+    //[self.navigationController.toolbar setItems:[NSArray arrayWithObjects:item1,flexible,nil] animated:YES];
     [self setToolbarItems:[NSArray arrayWithObjects:item1,flexible,nil] animated:YES];
     
+    //设置工具栏背景
     self.navigationController.toolbar.barTintColor = [UIColor colorWithRed:0.2 green:0.72 blue:0.46 alpha:1];
     self.navigationController.toolbar.barStyle = UIBarStyleBlack;
     self.navigationController.toolbar.tintColor = [UIColor whiteColor];
