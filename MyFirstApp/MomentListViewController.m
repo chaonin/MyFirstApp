@@ -167,7 +167,10 @@
         return (NSComparisonResult)NSOrderedSame;
     }];
 
-    [self performSelector:@selector(handleView) withObject:nil afterDelay:0.3];
+    //加入编辑功能以下函数导致App Crash, Why??换为直接调用后没问题
+    //[self performSelector:@selector(handleView) withObject:nil afterDelay:0.3];
+    [NSThread sleepForTimeInterval:0.3];
+    [self handleView];
     
 }
 
