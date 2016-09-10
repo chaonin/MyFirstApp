@@ -140,6 +140,7 @@
     self.contentText.textColor = [UIColor blackColor];
     self.contentText.font = [UIFont systemFontOfSize:18];
     self.contentText.textAlignment = NSTextAlignmentLeft;
+    [self.contentText sizeToFit];//加了这行才真正显示多行
     //[self.view addSubview:contentText];//text放进scrollView，这里不再需要
     
     UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, [KetangUtility screenWidth], [KetangUtility screenHeight]-64)];
