@@ -24,6 +24,7 @@
 @property(nonatomic, strong) UIView *retryView;
 @property(nonatomic) BOOL tableShowed,getRomoveNotification;
 @property(nonatomic, strong) UIImageView *cover;
+@property(nonatomic, strong) NSNotificationCenter *center;
 
 @end
 
@@ -217,9 +218,9 @@
     
     [self setSingleLineTitle:@"笔记"];
     
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
-    [center addObserver:self selector:@selector(handleRemove) name:@"deleteReload" object:nil];
+    self.center = [NSNotificationCenter defaultCenter];
+    [self.center addObserver:self selector:@selector(loadMoment) name:@"newMomentSave" object:nil];
+    [self.center addObserver:self selector:@selector(handleRemove) name:@"deleteReload" object:nil];
  
 }
 
@@ -292,7 +293,7 @@
     [dateDictionary addEntriesFromDictionary:dictionary];
     
     
-    MomentDetailViewController *detail = [[MomentDetailViewController alloc] initWithDictionary:dateDictionary];
+    MomentDetailViewController *detail = [[MomentDetailViewController alloc] initWithDictionary:dateDictionary andNotificationCenter:self.center];
 
     //右侧滑入笔记详情
     [self.navigationController pushViewController:detail animated:YES];

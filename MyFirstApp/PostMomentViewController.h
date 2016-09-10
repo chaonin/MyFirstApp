@@ -12,4 +12,6 @@
 //遵从UITextViewDeledate代理协议
 @interface PostMomentViewController : BaseViewController<UITextViewDelegate>
 
+-(PostMomentViewController *)initWithDictionary:(NSDictionary*)dictionary;
+
 @end
