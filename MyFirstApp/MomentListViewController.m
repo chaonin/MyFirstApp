@@ -167,9 +167,6 @@
         return (NSComparisonResult)NSOrderedSame;
     }];
 
-    //self.moment = [KetangPersistentManager getMoment];
-    //[self showAlertWithTitle:@"beforeCrashed" message:nil buttonText:@"ok"];
-
     [self performSelector:@selector(handleView) withObject:nil afterDelay:0.3];
     
 }

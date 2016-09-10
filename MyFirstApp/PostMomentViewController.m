@@ -51,8 +51,8 @@
     NSNumber *timestamp = [KetangUtility timestamp];
     NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:content, @"content", timestamp, @"timestamp", nil];
     
-    //读取笔记，把正在编辑的笔记从后台删除（读取、查询、删除病保存）->这个可以发送一个"deleteReload"通知给MomentListViewController做好刷新显示
-                                                           //而不是"newMomentSasve"通知，否则出错!（与delete笔记后重新显示的逻辑相同）
+    //读取笔记，把正在编辑的笔记从后台删除（读取、查询、删除并保存）->这个可以发送一个"deleteReload"通知给MomentListViewController做好刷新显示
+                                                           //而不是"newMomentSave"通知，否则出错!（与delete笔记后重新显示的逻辑相同）
     id array = [KetangPersistentManager getMoment];
     NSMutableArray *moment = [NSMutableArray arrayWithArray:array];
     NSInteger count = moment.count,i;
@@ -80,12 +80,13 @@
         NSNotification *notification = [NSNotification notificationWithName:@"deleteReload" object:nil];
         [center postNotification:notification];
         
-        //释放编辑视图
-        [self dismissViewControllerAnimated:YES completion:nil];
-        
         //通知MomentDetailViewController去刷新
         notification = [NSNotification notificationWithName:@"editReload" object:nil];
         [center postNotification:notification];
+        
+        //释放编辑视图
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
         return;
     }
     [self showAlertWithTitle:@"存储失败" message:nil buttonText:@"好"];
@@ -95,7 +96,7 @@
 -(void)saveMoment{
     
     //如果笔记是重新被编辑，调用另一个方法存储笔记，以覆盖原笔记
-    if (_isEdit) {
+    if (self.isEdit) {
         [self saveWithEdit];
         return;
     }
@@ -154,6 +155,7 @@
     
     //初始化笔记编辑框
     self.inputView = [[UITextView alloc] initWithFrame:CGRectMake(0, 84, [UIScreen mainScreen].bounds.size.width, 300)];
+    self.inputView.font = [UIFont systemFontOfSize:18];
     //self.inputView.editable = YES;
     [self.view addSubview:self.inputView];
     self.inputView.text = self.text;//self.text为该类的全局变量，声明的时候默认初始化为0，

@@ -31,6 +31,8 @@
     count = mmoment.count;
     for (i = 0; i < count; i = i+1){
         if ([[mmoment[i] objectForKey:@"timestamp"]  isEqual:[self.dictionary objectForKey:@"timestamp"]] ) {
+            //[self showAlertWithTitle:@"fff" message:nil buttonText:@"好"];
+
             [mmoment removeObjectAtIndex:i];
             BOOL saveSuccess = [KetangPersistentManager saveMoment:mmoment];
             if (saveSuccess) {
@@ -40,6 +42,9 @@
                 [center postNotification:notification];
                 //回到笔记列表
                 [self.navigationController popViewControllerAnimated:YES];
+
+                //[NSThread sleepForTimeInterval:3];
+
                 return;
             }
             [self showAlertWithTitle:@"删除笔记失败" message:nil buttonText:@"好"];
@@ -87,7 +92,7 @@
     NSArray *array = [KetangPersistentManager getMoment];
     NSInteger count = array.count;
     NSString *newContent = [array[count-1] objectForKey:@"content"];
-    NSString *timestamp = [array[count-1] objectForKey:@"timestamp"];
+    NSNumber *timestamp = [array[count-1] objectForKey:@"timestamp"];
     //更新显示
     self.contentText.text = newContent;
     //更新笔记内容和时间戳
